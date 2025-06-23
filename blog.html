@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <title>Blog | Dhanvin Ganeshkumar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Favorite Readings</title>
 
   <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
@@ -15,12 +15,13 @@
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #f7f9fc, #eef3f9);
+      background: linear-gradient(to right, #f7f9fc, #eaf0f8);
       min-height: 100vh;
-      cursor: none; /* Hide default cursor */
+      position: relative;
+      overflow-x: hidden;
+      cursor: none;
     }
 
-    /* Custom circle cursor */
     .custom-cursor {
       position: fixed;
       top: 0;
@@ -36,7 +37,6 @@
       transition: transform 0.1s ease;
     }
 
-    /* Click animation */
     .custom-cursor.click {
       animation: clickPulse 0.3s ease;
     }
@@ -56,50 +56,8 @@
       }
     }
 
-    .white-panel {
-      max-width: 800px;
-      margin: 120px auto 40px;
-      padding: 50px 40px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-      animation: fadeIn 0.6s ease-in-out;
-      position: relative;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    h1 {
-      font-size: 36px;
-      font-weight: 600;
-      margin-bottom: 24px;
-      color: #222;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    ul li {
-      font-size: 20px;
-      margin-bottom: 16px;
-      padding: 10px 16px;
-      border-radius: 8px;
-      background: #f8f9fa;
-      transition: all 0.3s;
-    }
-
-    ul li:hover {
-      background: #e9f1ff;
-      color: #007bff;
-    }
-
     .dropdown-container {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 20px;
       z-index: 10;
@@ -154,6 +112,38 @@
     .dropdown-container:hover .dropdown-content {
       display: block;
     }
+
+    .message-box {
+      background: white;
+      padding: 50px 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      text-align: center;
+      max-width: 600px;
+      margin: 140px auto;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .coming-soon-icon {
+      font-size: 48px;
+      color: #0d6efd;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
@@ -161,37 +151,42 @@
   <!-- Circle Cursor -->
   <div class="custom-cursor" id="cursor"></div>
 
-  <!-- Dropdown -->
+  <!-- Dropdown at top-left -->
   <div class="dropdown-container">
     <a href="#" class="floating-button">
-      <i class="bi bi-book"></i> Readings <i class="bi bi-caret-down-fill"></i>
+      <i class="bi bi-journal-text"></i> Blog <i class="bi bi-caret-down-fill"></i>
     </a>
     <div class="dropdown-content">
       <a href="index.html"><i class="bi bi-house-door-fill"></i> Home</a>
-      <a href="blog.html"><i class="bi bi-journal-text"></i> Blog</a>
+      <a href="readings.html"><i class="bi bi-book"></i> Readings</a>
     </div>
   </div>
 
-  <!-- Content -->
-  <div class="white-panel">
-    <h1>Favorite Readings:</h1>
-    <ul>
-      <li>The Lean Startup</li>
-      <li>Atomic Habits</li>
-      <li>Almanack of Naval Ravikant</li>
-      <li>Algorithms to Live By</li>
-    </ul>
+  <!-- Message -->
+  <div class="message-box">
+    <div class="coming-soon-icon">🚧</div>
+    <h1><span id="typed"></span></h1>
+    <p>Hear more about my thoughts and journey building accessible tech.</p>
   </div>
 
-  <!-- Cursor Script -->
+  <!-- Typed.js Script -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    new Typed('#typed', {
+      strings: ['Blog Coming Soon...', 'Working on something awesome!'],
+      typeSpeed: 60,
+      backSpeed: 40,
+      loop: true
+    });
+  </script>
+
+  <!-- Custom Cursor Script -->
   <script>
     const cursor = document.getElementById('cursor');
-
     document.addEventListener('mousemove', (e) => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
     });
-
     document.addEventListener('click', () => {
       cursor.classList.add('click');
       setTimeout(() => cursor.classList.remove('click'), 300);
